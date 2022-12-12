@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>177050153144-h8i8tjp34iv1c0bc8lcfe5furha4he13.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.177050153144-h8i8tjp34iv1c0bc8lcfe5furha4he13</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCSaQdNlt5hz1U50S0pNlfv_FZhx3efwYM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>177050153144</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.gamesScore</string>
+	<key>PROJECT_ID</key>
+	<string>md2022-96ac9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>md2022-96ac9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:177050153144:ios:5ab07c9cb7caa8851ac44d</string>
+</dict>
+</plist>
