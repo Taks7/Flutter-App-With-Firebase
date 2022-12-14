@@ -19,11 +19,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Games Review",
+      theme: ThemeData(primarySwatch: Colors.pink),
       initialRoute: '/game-screen',
       routes: {
         '/game-screen': (context) => GameScreen(),
-       // '/chat-messages': (context) => ,
+        // '/chat-messages': (context) => ,
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
