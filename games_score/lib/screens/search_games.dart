@@ -20,7 +20,7 @@ class _search_gamesState extends State<search_games> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
-              // b) Install the controller
+
               controller: controller,
             ),
             ElevatedButton(

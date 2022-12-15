@@ -8,7 +8,11 @@ import 'package:http/http.dart' as http;
 Future<Game> fetchAlbum(String title) async {
   final response = await http.get(Uri.parse(
       'https://www.cheapshark.com/api/1.0/games?title=${title}&limit=60&exact=0'));
+  // Depending on the game title you obtain a different game (It's very case sensitive)
+  //https://apidocs.cheapshark.com/ here is where we have obtained the api information
 
+
+  //Here we wait for the response, if the server returns OK then we get the code 200
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
@@ -22,6 +26,9 @@ Future<Game> fetchAlbum(String title) async {
 
 //https://javiercbk.github.io/json_to_dart/
 //per generar les clases
+
+
+//class used for handeling the api info (all through a json)
 
 class Game {
   String? gameID;
