@@ -24,11 +24,10 @@ class _search_gamesState extends State<search_games> {
               controller: controller,
             ),
             ElevatedButton(
-              child: const Text("Edit text"),
+              child: const Text("Search Game"),
               onPressed: () {
                 title = controller.text;
-                Navigator.of(context)
-                    .pushNamed(
+                Navigator.of(context).pushNamed(
                   '/game-screen',
                   arguments: title,
                 );

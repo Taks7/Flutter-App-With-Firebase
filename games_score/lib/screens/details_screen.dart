@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:games_score/model/games.dart';
 import 'package:flutter/material.dart';
 
+//Aqui es on es redirigeix la pagina per puntuar els jocs amb les estrelles
+//Cada valor de la estrella es pasa a String i s'envia a firebase
 class details_screen extends StatefulWidget {
   const details_screen({Key? key}) : super(key: key);
   @override
@@ -63,6 +64,16 @@ class _details_screenState extends State<details_screen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text("Your last rate was:  "),
+              _details(),
+            ],
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               Text(
                 "WIP: More categories will be added in a future",
                 style: TextStyle(
@@ -82,43 +93,35 @@ class _details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _db = FirebaseFirestore.instance;
-    final messagesPath = "/rating";
+    final ratingPath = "/rating";
     return StreamBuilder(
       stream: _db
-          .collection(messagesPath)
+          .collection(ratingPath)
           .orderBy("date", descending: true)
-          .limit(200)
           .snapshots(),
       builder: (
         BuildContext context,
         AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
       ) {
-        if (snapshot.hasError) {
-          return ErrorWidget(snapshot.error.toString());
-        }
-        if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
-        }
         final querySnap = snapshot.data!;
         final docs = querySnap.docs;
-        return ListView.builder(
-          reverse: true,
-          itemCount: docs.length,
-          itemBuilder: (context, index) {
-            final message = docs[index];
-            return Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(6),
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                  color: Colors.white,
-                  child: Text(message['text']),
-                ),
-              ],
-            );
-          },
-        );
+
+        if (docs.length == 0) {
+          return Text("There is no last review");
+        } else {
+          final message = docs[0];
+          print(message);
+          return Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(6),
+                margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                color: Colors.white,
+                child: Text(message['rate']),
+              ),
+            ],
+          );
+        }
       },
     );
   }
@@ -139,7 +142,7 @@ class _ScoreAGameState extends State<_ScoreAGame> {
   @override
   Widget build(BuildContext context) {
     return RatingBar.builder(
-      initialRating: 3,
+      //initialRating: 3,
       minRating: 1,
       direction: Axis.horizontal,
       allowHalfRating: false,
