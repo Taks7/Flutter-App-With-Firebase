@@ -48,7 +48,65 @@ class _details_screenState extends State<details_screen> {
                 ),
                 child: _ScoreAGame(
                   sendRating: (String totalrating) {
-                    _db.collection("/rating/$titleGame").add(
+                    _db.collection("/rating/$titleGame/gameplay").add(
+                      {
+                        'rate': totalrating,
+                        'date': Timestamp.now(),
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Art:  ",
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                child: _ScoreAGame(
+                  sendRating: (String totalrating) {
+                    _db.collection("/rating/$titleGame/art").add(
+                      {
+                        'rate': totalrating,
+                        'date': Timestamp.now(),
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Music:  ",
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                child: _ScoreAGame(
+                  sendRating: (String totalrating) {
+                    _db.collection("/rating/$titleGame/music").add(
                       {
                         'rate': totalrating,
                         'date': Timestamp.now(),
@@ -71,7 +129,31 @@ class _details_screenState extends State<details_screen> {
                   fontSize: 16,
                 ),
               ),
-              PrintLastRate(),
+              PrintLastRateGameplay(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Your last art rate was:  ",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              PrintLastRateArt(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Your last music rate was:  ",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              PrintLastRateMusic(),
             ],
           ),
           SizedBox(
@@ -95,11 +177,11 @@ class _details_screenState extends State<details_screen> {
   }
 }
 
-class PrintLastRate extends StatelessWidget {
+class PrintLastRateGameplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _db = FirebaseFirestore.instance;
-    final ratingPath = "/rating/$titleGame";
+    final ratingPath = "/rating/$titleGame/gameplay";
     return StreamBuilder(
       stream: _db
           .collection(ratingPath)
@@ -109,6 +191,106 @@ class PrintLastRate extends StatelessWidget {
         BuildContext context,
         AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
       ) {
+        final querySnap = snapshot.data!;
+        final docs = querySnap.docs;
+
+        if (docs.length == 0) {
+          //Comprobem si hi ha algo dins de la llista
+          return Text(
+            "There is no last review",
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.blueGrey,
+              fontWeight: FontWeight.bold,
+            ),
+          );
+        } else {
+          final rating = docs[0];
+          return Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                child: Text(
+                  rating['rate'],
+                  style: TextStyle(color: Colors.yellow, fontSize: 20),
+                ),
+              ),
+            ],
+          );
+        }
+      },
+    );
+  }
+}
+
+class PrintLastRateArt extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final _db = FirebaseFirestore.instance;
+    final ratingPath = "/rating/$titleGame/art";
+    return StreamBuilder(
+      stream: _db
+          .collection(ratingPath)
+          .orderBy("date", descending: true)
+          .snapshots(),
+      builder: (
+          BuildContext context,
+          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
+          ) {
+        final querySnap = snapshot.data!;
+        final docs = querySnap.docs;
+
+        if (docs.length == 0) {
+          //Comprobem si hi ha algo dins de la llista
+          return Text(
+            "There is no last review",
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.blueGrey,
+              fontWeight: FontWeight.bold,
+            ),
+          );
+        } else {
+          final rating = docs[0];
+          return Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                child: Text(
+                  rating['rate'],
+                  style: TextStyle(color: Colors.yellow, fontSize: 20),
+                ),
+              ),
+            ],
+          );
+        }
+      },
+    );
+  }
+}
+
+class PrintLastRateMusic extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final _db = FirebaseFirestore.instance;
+    final ratingPath = "/rating/$titleGame/music";
+    return StreamBuilder(
+      stream: _db
+          .collection(ratingPath)
+          .orderBy("date", descending: true)
+          .snapshots(),
+      builder: (
+          BuildContext context,
+          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
+          ) {
         final querySnap = snapshot.data!;
         final docs = querySnap.docs;
 
@@ -177,3 +359,5 @@ class _ScoreAGameState extends State<_ScoreAGame> {
     );
   }
 }
+
+
