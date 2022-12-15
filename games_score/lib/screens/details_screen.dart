@@ -9,9 +9,10 @@ class details_screen extends StatefulWidget {
   @override
   State<details_screen> createState() => _details_screenState();
 }
+String titleGame = "";
 
 class _details_screenState extends State<details_screen> {
-  String titleGame = "";
+
   @override
   void didChangeDependencies() {
     final string = ModalRoute.of(context)!.settings.arguments;
@@ -47,7 +48,7 @@ class _details_screenState extends State<details_screen> {
                 ),
                 child: _ScoreAGame(
                   sendRating: (String totalrating) {
-                    _db.collection("/rating").add(
+                    _db.collection("/rating/$titleGame").add(
                       {
                         'rate': totalrating,
                         'date': Timestamp.now(),
@@ -98,7 +99,7 @@ class PrintLastRate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _db = FirebaseFirestore.instance;
-    final ratingPath = "/rating";
+    final ratingPath = "/rating/$titleGame";
     return StreamBuilder(
       stream: _db
           .collection(ratingPath)
