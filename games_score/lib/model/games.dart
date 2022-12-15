@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-//https://javiercbk.github.io/json_to_dart/
-//per generar les clases
-
 // https://docs.flutter.dev/cookbook/networking/fetch-data
+
 Future<Game> fetchAlbum(String title) async {
   final response = await http.get(Uri.parse(
       'https://www.cheapshark.com/api/1.0/games?title=${title}&limit=60&exact=0'));
@@ -22,6 +19,9 @@ Future<Game> fetchAlbum(String title) async {
     throw Exception('Failed to load album');
   }
 }
+
+//https://javiercbk.github.io/json_to_dart/
+//per generar les clases
 
 class Game {
   String? gameID;
