@@ -30,8 +30,8 @@ class _GameScreenState extends State<game_screen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        actions: [
-          GestureDetector(
+        leading:  Expanded(
+          child: GestureDetector(
             child: Icon(Icons.arrow_back),
             onTap: () {
               games.clear();
@@ -39,9 +39,9 @@ class _GameScreenState extends State<game_screen> {
               Navigator.pop(context);
             },
           ),
-        ],
+        ),
       ),
-      backgroundColor: const Color(0xffd4ebdf),
+      backgroundColor: Color.fromARGB(255, 232, 224, 224),
       body: Stack(
         children: [
           Row(
