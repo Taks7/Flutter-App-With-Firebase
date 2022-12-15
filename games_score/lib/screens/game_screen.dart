@@ -46,21 +46,6 @@ class _GameScreenState extends State<game_screen> {
       backgroundColor: const Color(0xffd4ebdf),
       body: Stack(
         children: [
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: FloatingActionButton(
-                onPressed: () {
-                  setState(() {
-                    //MARCAR COMO FAVORITO
-                    Navigator.pushNamed(context,
-                        '/details-games',
-                        arguments:games[0],
-                    );
-                  });
-                },
-                child: Icon(Icons.star),
-          ),
-          ),
           Row(
             children: [
               Expanded(
@@ -117,13 +102,17 @@ class _GameScreenState extends State<game_screen> {
                     color: Colors.red,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: GameplayCounter(size: 100),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ArtCounter(size: 100),
+                FloatingActionButton(
+                  onPressed: () {
+                    setState(() {
+                      //MARCAR COMO FAVORITO
+                      Navigator.pushNamed(context,
+                        '/details-games',
+                        arguments:games[0],
+                      );
+                    });
+                  },
+                  child: Icon(Icons.star),
                 ),
               ],
             ),
