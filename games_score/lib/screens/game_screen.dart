@@ -15,11 +15,10 @@ class game_screen extends StatefulWidget {
 }
 
 List<String> games = [];
+List<String> urlGames = [];
+
 class _GameScreenState extends State<game_screen> {
-
-
   String titleGame = "";
-
   @override
   void didChangeDependencies(){
     final  string = ModalRoute.of(context)!.settings.arguments;
@@ -29,14 +28,17 @@ class _GameScreenState extends State<game_screen> {
   @override
   Widget build(BuildContext context) {
     Future<Game> futureAlbum = fetchAlbum(titleGame);
-
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
+           automaticallyImplyLeading: false,
+          actions: [
           GestureDetector(
+            child: Icon(Icons.arrow_back
+            ),
             onTap: () {
-              Navigator.of(context)
-                  .pop();
+              games.clear();
+              urlGames.clear();
+              Navigator.pop(context);
             },
           ),
         ],
@@ -44,21 +46,39 @@ class _GameScreenState extends State<game_screen> {
       backgroundColor: const Color(0xffd4ebdf),
       body: Stack(
         children: [
-          Column(
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: FloatingActionButton(
+                onPressed: () {
+                  setState(() {
+                    //MARCAR COMO FAVORITO
+                    Navigator.pushNamed(context,
+                        '/details-games',
+                        arguments:games[0],
+                    );
+                  });
+                },
+                child: Icon(Icons.star),
+          ),
+          ),
+          Row(
             children: [
               Expanded(
                 child: Container(
                   child: FutureBuilder<Game>(
                     future: futureAlbum,
                     builder: (context, snapshot) {
-                      GameInfo? data = snapshot.data?.gameInfo;
-                      // By default, show a loading spinner.
-                      if (snapshot.hasData) {
-                        return Text('${data?.name}');
-                      } else if (snapshot.hasError) {
+                      if(snapshot.hasData)
+                        {
+                          games.add(snapshot.data!.external!);
+                          return Text(games[0]);
+                        }else if (snapshot.hasError) {
                         return Text('${snapshot.error}');
                       }
+
+                      // By default, show a loading spinner.
                       return const CircularProgressIndicator();
+
                     },
                   ),
                 ),
@@ -68,10 +88,15 @@ class _GameScreenState extends State<game_screen> {
                   child: FutureBuilder<Game>(
                     future: futureAlbum,
                     builder: (context, snapshot) {
-                      String name = snapshot.data!.gameInfo?.name ?? 'default';
-                      if (snapshot.hasData) {
-                        return Text(name);
-                      } else if (snapshot.hasError) {
+                      if(snapshot.hasData)
+                      {
+                        urlGames.add(snapshot.data!.thumb!);
+                        return Image.network(urlGames[0],
+                          errorBuilder: (BuildContext context, Object exception,
+                          StackTrace? stackTrace) {
+                          return const Text('Your image could not be loaded :V');},
+                            );
+                      }else if (snapshot.hasError) {
                         return Text('${snapshot.error}');
                       }
 
@@ -79,53 +104,8 @@ class _GameScreenState extends State<game_screen> {
                       return const CircularProgressIndicator();
                     },
                   ),
-                  color: Colors.greenAccent,
                 ),
               ), //AQUI PONEMOS LA INFO DE METASCORE (NOMBRE, PRECIO, PUNTUACION)
-              Expanded(
-                child: Column(children: [
-                  Container(
-                    child: FutureBuilder<Game>(
-                      future: futureAlbum,
-                      builder: (context, snapshot) {
-                        String metacriticScore = snapshot.data!.gameInfo
-                                ?.metacriticScore ?? //CAMBIAR AQUI
-                            'default';
-                        if (snapshot.hasData) {
-                          return Text("Metacritic score: " + metacriticScore);
-                        } else if (snapshot.hasError) {
-                          return Text('${snapshot.error}');
-                        }
-
-                        // By default, show a loading spinner.
-                        return const CircularProgressIndicator();
-                      },
-                    ),
-                    color: Colors.greenAccent,
-                  ),
-                  Container(
-                    child: FutureBuilder<Game>(
-                      future: futureAlbum,
-                      builder: (context, snapshot) {
-                        String steamRatingText = snapshot.data!.gameInfo
-                                ?.steamRatingText ?? //CAMBIAR AQUI
-                            'default';
-                        if (snapshot.hasData) {
-                          return Text("Steam review: " + steamRatingText);
-                        } else if (snapshot.hasError) {
-                          return Text('${snapshot.error}');
-                        }
-
-                        // By default, show a loading spinner.
-                        return const CircularProgressIndicator();
-                      },
-                    ),
-                    color: Colors.lightGreenAccent,
-                  ),
-                ]),
-              ), //AQUI PONEMOS LA DESCRIPCIÓN DEL JUEGO Y LA PUNTUACION DE ARTE Y GAMEPLAY
-            ],
-          ),
           Align(
             alignment: Alignment.bottomRight,
             child: Column(
@@ -150,6 +130,11 @@ class _GameScreenState extends State<game_screen> {
           ),
         ],
       ),
+  ],
+      ),
     );
+
   }
 }
+
+

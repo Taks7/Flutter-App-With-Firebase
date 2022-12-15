@@ -9,11 +9,21 @@ class details_screen extends StatefulWidget {
 }
 
 class _details_screenState extends State<details_screen> {
+
+  String titleGame = "";
+  @override
+  void didChangeDependencies(){
+    final  string = ModalRoute.of(context)!.settings.arguments;
+    titleGame = string.toString();
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("game")),
+      appBar: AppBar(title: const Text("Review")),
       body: Center(
+        child: Text(titleGame),
         ),
     );
   }
