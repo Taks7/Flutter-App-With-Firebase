@@ -107,17 +107,17 @@ class _details extends StatelessWidget {
         final docs = querySnap.docs;
 
         if (docs.length == 0) {
+          //Comprobem si hi ha algo dins de la llista
           return Text("There is no last review");
         } else {
-          final message = docs[0];
-          print(message);
+          final rating = docs[0];
           return Row(
             children: [
               Container(
                 padding: const EdgeInsets.all(6),
                 margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                 color: Colors.white,
-                child: Text(message['rate']),
+                child: Text(rating['rate']),
               ),
             ],
           );
@@ -155,7 +155,6 @@ class _ScoreAGameState extends State<_ScoreAGame> {
       onRatingUpdate: (rating) {
         totalrating = rating.toString();
         widget.sendRating(totalrating);
-        print(rating);
       },
     );
   }
