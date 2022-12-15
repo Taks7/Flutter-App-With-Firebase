@@ -33,12 +33,12 @@ class Game {
 
   Game(
       {this.gameID,
-        this.steamAppID,
-        this.cheapest,
-        this.cheapestDealID,
-        this.external,
-        this.internalName,
-        this.thumb});
+      this.steamAppID,
+      this.cheapest,
+      this.cheapestDealID,
+      this.external,
+      this.internalName,
+      this.thumb});
 
   Game.fromJson(Map<String, dynamic> json) {
     gameID = json['gameID'];
@@ -62,4 +62,3 @@ class Game {
     return data;
   }
 }
-
