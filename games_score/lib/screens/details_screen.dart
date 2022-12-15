@@ -64,8 +64,13 @@ class _details_screenState extends State<details_screen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Your last rate was:  "),
-              _details(),
+              Text(
+                "Your last Gameplay rate was:  ",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              PrintLastRate(),
             ],
           ),
           SizedBox(
@@ -77,7 +82,7 @@ class _details_screenState extends State<details_screen> {
               Text(
                 "WIP: More categories will be added in a future",
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: Colors.black),
               )
@@ -89,7 +94,7 @@ class _details_screenState extends State<details_screen> {
   }
 }
 
-class _details extends StatelessWidget {
+class PrintLastRate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _db = FirebaseFirestore.instance;
@@ -108,16 +113,28 @@ class _details extends StatelessWidget {
 
         if (docs.length == 0) {
           //Comprobem si hi ha algo dins de la llista
-          return Text("There is no last review");
+          return Text(
+            "There is no last review",
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.blueGrey,
+              fontWeight: FontWeight.bold,
+            ),
+          );
         } else {
           final rating = docs[0];
           return Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(6),
-                margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                color: Colors.white,
-                child: Text(rating['rate']),
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                child: Text(
+                  rating['rate'],
+                  style: TextStyle(color: Colors.yellow, fontSize: 20),
+                ),
               ),
             ],
           );
