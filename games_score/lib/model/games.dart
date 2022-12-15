@@ -7,9 +7,9 @@ import 'package:http/http.dart' as http;
 //https://javiercbk.github.io/json_to_dart/
 //per generar les clases
 
-Future<Game> fetchAlbum() async {
+Future<Game> fetchAlbum(String title) async {
   final response = await http.get(Uri.parse(
-      'https://www.cheapshark.com/api/1.0/deals?id=X8sebHhbc1Ga0dTkgg59WgyM506af9oNZZJLU9uSrX8%3D')); // ES POT CAMBIAR EL ID "X8sebHhbc1Ga0dTkgg59WgyM506af9oNZZJLU9uSrX8%3D"
+      'https://www.cheapshark.com/api/1.0/games?title=${title}&limit=60&exact=0')); // ES POT CAMBIAR EL ID "X8sebHhbc1Ga0dTkgg59WgyM506af9oNZZJLU9uSrX8%3D"
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

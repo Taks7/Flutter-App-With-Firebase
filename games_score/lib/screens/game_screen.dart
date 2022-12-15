@@ -1,18 +1,46 @@
-//import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:games_score/widgets/favourite_button.dart';
 import 'package:games_score/model/games.dart';
 import 'package:games_score/widgets/gameplay_points_button.dart';
 import 'package:games_score/widgets/art_points_button.dart';
-//import 'package:games_score/widgets/chat_title.dart';
 
-class GameScreen extends StatelessWidget {
-  Future<Game> futureAlbum = fetchAlbum();
+
+class game_screen extends StatefulWidget {
+  game_screen({
+    Key? key,
+  }) : super(key: key);
+  @override
+  State<game_screen> createState() => _GameScreenState();
+}
+
+List<String> games = [];
+class _GameScreenState extends State<game_screen> {
+
+
+  String titleGame = "";
 
   @override
+  void didChangeDependencies(){
+    final  string = ModalRoute.of(context)!.settings.arguments;
+    titleGame = string.toString();
+    super.didChangeDependencies();
+  }
+  @override
   Widget build(BuildContext context) {
+    Future<Game> futureAlbum = fetchAlbum(titleGame);
+
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .pop();
+            },
+          ),
+        ],
+      ),
       backgroundColor: const Color(0xffd4ebdf),
       body: Stack(
         children: [
@@ -23,20 +51,18 @@ class GameScreen extends StatelessWidget {
                   child: FutureBuilder<Game>(
                     future: futureAlbum,
                     builder: (context, snapshot) {
-                      String thumb =
-                          snapshot.data!.gameInfo?.thumb ?? 'default';
+                      GameInfo? data = snapshot.data?.gameInfo;
+                      // By default, show a loading spinner.
                       if (snapshot.hasData) {
-                        return Image.network(thumb);
+                        return Text('${data?.name}');
                       } else if (snapshot.hasError) {
                         return Text('${snapshot.error}');
                       }
-
-                      // By default, show a loading spinner.
                       return const CircularProgressIndicator();
                     },
                   ),
                 ),
-              ), //AQUI HAY QUE PONER LA IMAGEN DEL JUEGO SELECCIONADO
+              ),
               Expanded(
                 child: Container(
                   child: FutureBuilder<Game>(

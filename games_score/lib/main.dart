@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:games_score/firebase_options.dart';
+import 'package:games_score/screens/details_screen.dart';
 import 'package:games_score/screens/game_screen.dart';
+import 'package:games_score/screens/search_games.dart';
 //import 'package:games_score/screens/chat_list_screen.dart';
 //import 'package:games_score/screens/chat_screen.dart';
 
@@ -21,10 +23,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Games Review",
       theme: ThemeData(primarySwatch: Colors.pink),
-      initialRoute: '/game-screen',
+      initialRoute: '/search-games',
       routes: {
-        '/game-screen': (context) => GameScreen(),
-        // '/chat-messages': (context) => ,
+        '/game-screen': (context) => game_screen(),
+        '/search-games': (context) => search_games(),
+        '/details-games': (context) => details_screen(),
       },
       debugShowCheckedModeBanner: false,
     );
