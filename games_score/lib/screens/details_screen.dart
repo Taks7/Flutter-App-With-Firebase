@@ -9,10 +9,10 @@ class details_screen extends StatefulWidget {
   @override
   State<details_screen> createState() => _details_screenState();
 }
+
 String titleGame = "";
 
 class _details_screenState extends State<details_screen> {
-
   @override
   void didChangeDependencies() {
     final string = ModalRoute.of(context)!.settings.arguments;
@@ -59,6 +59,9 @@ class _details_screenState extends State<details_screen> {
               ),
             ],
           ),
+          SizedBox(
+            height: 30,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -87,6 +90,9 @@ class _details_screenState extends State<details_screen> {
                 ),
               ),
             ],
+          ),
+          SizedBox(
+            height: 30,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -238,9 +244,9 @@ class PrintLastRateArt extends StatelessWidget {
           .orderBy("date", descending: true)
           .snapshots(),
       builder: (
-          BuildContext context,
-          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
-          ) {
+        BuildContext context,
+        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
+      ) {
         final querySnap = snapshot.data!;
         final docs = querySnap.docs;
 
@@ -288,9 +294,9 @@ class PrintLastRateMusic extends StatelessWidget {
           .orderBy("date", descending: true)
           .snapshots(),
       builder: (
-          BuildContext context,
-          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
-          ) {
+        BuildContext context,
+        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
+      ) {
         final querySnap = snapshot.data!;
         final docs = querySnap.docs;
 
@@ -336,7 +342,7 @@ class _ScoreAGame extends StatefulWidget {
 }
 
 //https://pub.dev/packages/flutter_rating_bar
-//per puntuar jocs
+//per puntuar amb barra d'estrelles
 class _ScoreAGameState extends State<_ScoreAGame> {
   String totalrating = "";
   @override
@@ -359,5 +365,3 @@ class _ScoreAGameState extends State<_ScoreAGame> {
     );
   }
 }
-
-
