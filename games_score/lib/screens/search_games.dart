@@ -14,7 +14,7 @@ class _search_gamesState extends State<search_games> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("game")),
+      appBar: AppBar(title: const Text("Game Searcher")),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
