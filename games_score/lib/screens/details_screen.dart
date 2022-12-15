@@ -142,7 +142,7 @@ class _details_screenState extends State<details_screen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Your last art rate was:  ",
+                "Your last Art rate was:  ",
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -154,7 +154,7 @@ class _details_screenState extends State<details_screen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Your last music rate was:  ",
+                "Your last Music rate was:  ",
                 style: TextStyle(
                   fontSize: 16,
                 ),
