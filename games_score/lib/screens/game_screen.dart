@@ -11,6 +11,7 @@ class game_screen extends StatefulWidget {
   @override
   State<game_screen> createState() => _GameScreenState();
 }
+
 //List of game names and urls we intend to add more games in the future for the request, due to the api being very case sensitive we need to be precise with the game if we want to get an specific one
 List<String> games = [];
 List<String> urlGames = [];
@@ -31,9 +32,9 @@ class _GameScreenState extends State<game_screen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading:  Expanded(
+        leading: Expanded(
           child: GestureDetector(
-            child: Icon(Icons.arrow_back),
+            child: const Icon(Icons.arrow_back),
             onTap: () {
               games.clear();
               urlGames.clear();
@@ -42,7 +43,7 @@ class _GameScreenState extends State<game_screen> {
           ),
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 232, 224, 224),
+      backgroundColor: const Color.fromARGB(255, 232, 224, 224),
       body: Stack(
         children: [
           Row(
@@ -52,7 +53,7 @@ class _GameScreenState extends State<game_screen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 40,
                     ),
                     FutureBuilder<Game>(
@@ -66,7 +67,7 @@ class _GameScreenState extends State<game_screen> {
                             errorBuilder: (BuildContext context,
                                 Object exception, StackTrace? stackTrace) {
                               return const Text(
-                                //Seems like some images of the api are banned or smh just an error that we got during development and now we have this to solve it
+                                  //Seems like some images of the api are banned or smh just an error that we got during development and now we have this to solve it
                                   'Your image could not be loaded :V');
                             },
                           );
@@ -78,7 +79,7 @@ class _GameScreenState extends State<game_screen> {
                         return const CircularProgressIndicator();
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 50,
                     ),
                     Container(
@@ -89,7 +90,7 @@ class _GameScreenState extends State<game_screen> {
                             games.add(snapshot.data!.external!);
                             return Text(
                               games[0],
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 24, fontWeight: FontWeight.bold),
                             );
                           } else if (snapshot.hasError) {
@@ -109,7 +110,7 @@ class _GameScreenState extends State<game_screen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: FavoriteButton(
                         color: Colors.red,
@@ -126,8 +127,28 @@ class _GameScreenState extends State<game_screen> {
                           );
                         });
                       },
-                      child: Icon(Icons.star),
+                      child: const Icon(Icons.star),
                     ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: FloatingActionButton(
+                        backgroundColor: Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            //MARCAR COMO FAVORITO
+                            Navigator.pushNamed(
+                              context,
+                              '/screenshoot-games',
+                              arguments: games[0],
+                            );
+                          });
+                        },
+                        child: const Icon(
+                          Icons.image,
+                          color: Colors.black,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
