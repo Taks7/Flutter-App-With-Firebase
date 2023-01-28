@@ -5,17 +5,21 @@ import 'package:http/http.dart' as http;
 
 // https://docs.flutter.dev/cookbook/networking/fetch-data
 
-Future<Game> fetchAlbum(String title) async {
+
+Future<List<Game>> fetchAlbum(String title) async {
   final response = await http.get(Uri.parse(
       'https://www.cheapshark.com/api/1.0/games?title=${title}&limit=60&exact=0'));
   //Depenent del titol del joc obtens un joc o un altre (es bastant case sensitive)
   //https://apidocs.cheapshark.com/ aqui es on obtenim la info de la api
-
   //Here we wait for the response, if the server returns OK then we get the code 200
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    return Game.fromJson(jsonDecode(response.body)[0]);
+    final jsonResponse = json.decode(response.body);
+    final gameList = jsonResponse as List;
+    return gameList.map((data) => Game.fromJson(data)).toList();
+
+
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
