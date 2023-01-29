@@ -110,7 +110,10 @@ class _search_gamesState extends State<search_games> {
             onPressed: () {
               FirebaseAuth.instance.signOut();
               setState(() {
-                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed(
+                  '/login-screen',
+                  //arguments: title,
+                );
               });
             },
           );
