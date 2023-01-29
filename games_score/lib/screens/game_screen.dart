@@ -38,9 +38,28 @@ class _GameScreenState extends State<game_screen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          "Game's Gallery",
-          style: const TextStyle(color: Colors.white),
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Game's Gallery, Select One",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Tap to Rate, Double Tap to Upload a Screenshot",
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
+              ],
+            )
+          ],
         ),
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         automaticallyImplyLeading: false,
@@ -58,7 +77,7 @@ class _GameScreenState extends State<game_screen> {
           ),
         ),
       ),
-      backgroundColor: const Color.fromARGB(255, 232, 224, 224),
+      backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
