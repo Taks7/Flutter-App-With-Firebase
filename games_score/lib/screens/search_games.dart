@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:games_score/model/games.dart';
+import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 class search_games extends StatefulWidget {
@@ -12,6 +13,10 @@ class search_games extends StatefulWidget {
 //We have used https://pub.dev/packages/icons_plus
 //to add more icons
 
+//We have used https://pub.dev/packages/flutter_animated_button
+//for the animated button and we have also used
+//https://pub.dev/packages/google_fonts for the different font
+
 class _search_gamesState extends State<search_games> {
   String title = "put here the title of the game";
   TextEditingController controller = TextEditingController();
@@ -19,6 +24,7 @@ class _search_gamesState extends State<search_games> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: false,
         automaticallyImplyLeading: false,
@@ -62,22 +68,31 @@ class _search_gamesState extends State<search_games> {
             TextField(
               controller: controller,
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
+            Padding(
+              padding: EdgeInsets.all(12),
+              child: AnimatedButton.strip(
+                animatedOn: AnimatedOn.onHover,
+                width: 200,
+                height: 70,
+                text: 'SEARCH',
+                isReverse: true,
+                selectedTextColor: Colors.white,
+                stripTransitionType: StripTransitionType.LEFT_TO_RIGHT,
+                selectedBackgroundColor: Colors.black,
+                textStyle: GoogleFonts.nunito(
+                    fontSize: 24,
+                    letterSpacing: 5,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300),
+                onPress: () {
+                  title = controller.text;
+                  Navigator.of(context).pushNamed(
+                    '/game-screen',
+                    arguments: title,
+                  );
+                },
               ),
-              child: const Text(
-                "Search Game",
-                style: TextStyle(color: Colors.amber, fontSize: 18),
-              ),
-              onPressed: () {
-                title = controller.text;
-                Navigator.of(context).pushNamed(
-                  '/game-screen',
-                  arguments: title,
-                );
-              },
-            )
+            ),
           ],
         ),
       ),
