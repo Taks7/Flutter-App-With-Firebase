@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:games_score/widgets/favourite_button.dart';
 import 'package:games_score/model/games.dart';
-import 'package:games_score/widgets/gameplay_points_button.dart';
-import 'package:games_score/widgets/art_points_button.dart';
+
 
 class game_screen extends StatefulWidget {
   game_screen({
@@ -37,10 +35,11 @@ class _GameScreenState extends State<game_screen> {
     Future<List<Game>> futureAlbum = fetchAlbum(titleGame);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
         automaticallyImplyLeading: false,
         leading: Expanded(
           child: GestureDetector(
-            child: const Icon(Icons.arrow_back),
+            child: const Icon(Icons.arrow_back,color: Colors.white,),
             onTap: () {
               games.clear();
               urlGames.clear();
@@ -71,6 +70,8 @@ class _GameScreenState extends State<game_screen> {
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context,index)=>GridTile(
                           child: Container(
+                            width: 250,
+                            height: 250,
                             child: GestureDetector(
                               onTap: (){
                                 setState(() {
@@ -97,7 +98,7 @@ class _GameScreenState extends State<game_screen> {
                                     StackTrace? stackTrace) {
                                   return const Text(
                                     //Seems like some images of the api are banned or smh just an error that we got during development and now we have this to solve it
-                                      'Your image could not be loaded :V');
+                                      'Your image could not be loaded, your game is:' );
                                 },
                               ),
                             ),

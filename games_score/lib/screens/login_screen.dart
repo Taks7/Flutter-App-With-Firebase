@@ -29,11 +29,11 @@ class _loginScreenState extends State<login_screen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(title: const Text("Sign In")),
       backgroundColor: Colors.white,
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: ((context, snapshot) {
+<<<<<<< Updated upstream
           if (snapshot.hasData) {
             return Align(
               alignment: Alignment.center,
@@ -61,6 +61,16 @@ class _loginScreenState extends State<login_screen>
               ),
             );
           } else {
+=======
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          else if(snapshot.hasData){
+
+            return search_games();
+          }
+          else {
+>>>>>>> Stashed changes
             return AuthPage();
           }
         }),
