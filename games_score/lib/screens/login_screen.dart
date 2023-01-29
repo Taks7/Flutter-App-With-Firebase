@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:games_score/model/games.dart';
 import 'package:flutter/material.dart';
+import 'package:games_score/screens/auth_screen.dart';
 import 'package:games_score/screens/screenshots_screen.dart';
 import 'package:games_score/screens/search_games.dart';
 import 'package:games_score/widgets/login_widget.dart';
@@ -59,7 +60,7 @@ class _loginScreenState extends State<login_screen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Sign In")),
+      //appBar: AppBar(title: const Text("Sign In")),
       backgroundColor: Colors.white,
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -92,7 +93,7 @@ class _loginScreenState extends State<login_screen>
               ),
             );
           } else {
-            return LoginWidget();
+            return AuthPage();
           }
         }),
       ),

@@ -1,21 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class LoginWidget extends StatefulWidget {
-  final VoidCallback onClickedSignUp;
+class SignUpWidget extends StatefulWidget {
+  final Function() onClickedSignIn;
 
-  const LoginWidget({
+  const SignUpWidget({
     Key? key,
-    required this.onClickedSignUp,
+    required this.onClickedSignIn,
   }) : super(key: key);
 
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  _SignUpWidgetState createState() => _SignUpWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _SignUpWidgetState extends State<SignUpWidget> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -43,7 +42,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               height: 20,
             ),
             Text(
-              "Hey There, \n Welcome Back!",
+              "Welcome to the \n Game Searcher!",
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             SizedBox(
@@ -74,10 +73,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                 size: 32,
               ),
               label: Text(
-                "Sign In",
+                "Sign Up",
                 style: TextStyle(fontSize: 24),
               ),
-              onPressed: signIn,
+              onPressed: signUp,
             ),
             SizedBox(
               height: 24,
@@ -85,12 +84,12 @@ class _LoginWidgetState extends State<LoginWidget> {
             RichText(
                 text: TextSpan(
                     style: TextStyle(color: Colors.black, fontSize: 20),
-                    text: "No Account? ",
+                    text: "Already have an account? ",
                     children: [
                   TextSpan(
                       recognizer: TapGestureRecognizer()
-                        ..onTap = widget.onClickedSignUp,
-                      text: "Sign Up",
+                        ..onTap = widget.onClickedSignIn,
+                      text: "Log In",
                       style: TextStyle(
                           decoration: TextDecoration.underline,
                           color: Theme.of(context).colorScheme.secondary)),
@@ -99,8 +98,8 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
       );
 
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+  Future signUp() async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim());
   }
