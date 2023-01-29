@@ -92,7 +92,7 @@ class _screenshoots_screenState extends State<screenshots_screen> {
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.black),
                   child: const Text(
-                    "Select a Screenshoot to upload",
+                    "Select a Screenshoot to upload (Only works with a mobile device)",
                     style: TextStyle(color: Colors.amber),
                   )),
             ],

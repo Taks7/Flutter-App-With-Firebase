@@ -37,6 +37,11 @@ class _GameScreenState extends State<game_screen> {
     Future<List<Game>> futureAlbum = fetchAlbum(titleGame);
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "Game's Gallery",
+          style: const TextStyle(color: Colors.white),
+        ),
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         automaticallyImplyLeading: false,
         leading: Expanded(
@@ -80,7 +85,6 @@ class _GameScreenState extends State<game_screen> {
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
-                              //MARCAR COMO FAVORITO
                               Navigator.pushNamed(
                                 context,
                                 '/details-games',
