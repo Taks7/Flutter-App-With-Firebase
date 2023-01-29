@@ -44,7 +44,7 @@ class _GameScreenState extends State<game_screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Game's Gallery, Select One",
                   style: TextStyle(color: Colors.white),
                 ),
@@ -53,9 +53,9 @@ class _GameScreenState extends State<game_screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Tap to Rate, Double Tap to Upload a Screenshot",
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                  style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
               ],
             )
