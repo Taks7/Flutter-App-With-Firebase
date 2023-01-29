@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:games_score/model/games.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: camel_case_types
 class game_screen extends StatefulWidget {
@@ -15,7 +16,22 @@ class game_screen extends StatefulWidget {
 //List of game names and urls we intend to add more games in the future for the request, due to the api being very case sensitive we need to be precise with the game if we want to get an specific one
 List<String> games = [];
 List<String> urlGames = [];
+List<String> cheapestDeal = [];
 int gameCount = 0;
+
+class GameSelected{
+  String title = "";
+  String cheapest = "";
+}
+void LaunchURL(String cheapestDealId) async {
+  final url = 'https://www.cheapshark.com/redirect?dealID=${cheapestDealId}';
+  final uri = (Uri.parse(url));
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
 void UpdateGameCount(int ListLength) {
   gameCount = ListLength;
@@ -53,9 +69,12 @@ class _GameScreenState extends State<game_screen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "Tap to Rate, Double Tap to Upload a Screenshot",
-                  style: TextStyle(color: Colors.white, fontSize: 14),
+                Flexible(
+                    child:
+                    Text(
+                      "Tap to Rate, Double Tap to Upload a Screenshot or Long Press to check the cheapest deal",
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
                 ),
               ],
             )
@@ -72,6 +91,7 @@ class _GameScreenState extends State<game_screen> {
             onTap: () {
               games.clear();
               urlGames.clear();
+              cheapestDeal.clear();
               Navigator.pop(context);
             },
           ),
@@ -90,6 +110,7 @@ class _GameScreenState extends State<game_screen> {
                   for (int i = 0; i < snapshot.data!.length; i++) {
                     urlGames.add(snapshot.data![i].thumb!);
                     games.add(snapshot.data![i].external!);
+                    cheapestDeal.add(snapshot.data![i].cheapestDealID!);
                   }
                   return GridView.builder(
                     gridDelegate:
@@ -99,37 +120,46 @@ class _GameScreenState extends State<game_screen> {
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) => GridTile(
                       child: Container(
-                        width: 250,
-                        height: 250,
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              Navigator.pushNamed(
-                                context,
-                                '/details-games',
-                                arguments: games[index],
-                              );
-                            });
-                          },
-                          onDoubleTap: () {
-                            setState(() {
-                              Navigator.pushNamed(
-                                context,
-                                '/screenshoot-games',
-                                arguments: games[index],
-                              );
-                            });
-                          },
-                          child: Image.network(
-                            urlGames[index],
-                            errorBuilder: (BuildContext context,
-                                Object exception, StackTrace? stackTrace) {
-                              return Text(
-                                  "Your image could not be loaded, the game is ${games[index]}");
+                          width: 200,
+                          height: 300,
+                          child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/details-games',
+
+                                    arguments: games[
+                                        index], //test(games[index],steamIDgames[index]),
+                                  );
+                                });
+                              },
+                              onDoubleTap: () {
+                                setState(() {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/screenshoot-games',
+                                    arguments: games[index],
+                                  );
+                                });
+                              },
+                            onLongPress: (){
+                                setState(() {
+                                  LaunchURL(cheapestDeal[index]);
+                                });
                             },
-                          ),
-                        ),
-                      ),
+                              child:Image.network(
+                                  urlGames[index],
+                                  errorBuilder: (BuildContext context,
+                                      Object exception,
+                                      StackTrace? stackTrace) {
+                                    return Text(
+                                        "Your image could not be loaded, the game is ${games[index]}");
+                                  },
+                                ),
+
+                              ),
+                    ),
                     ),
                   );
                 } else if (snapshot.hasError) {
