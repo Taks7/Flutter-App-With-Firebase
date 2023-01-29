@@ -17,8 +17,23 @@ List<String> games = [];
 List<String> urlGames = [];
 int gameCount = 5;
 
+void updateIndex()
+{
+  if(gameCount <60){
+    gameCount+=5;
+  }
+  else if(gameCount >= 60){
+    gameCount = 60;
+  }
+
+}
 class _GameScreenState extends State<game_screen> {
   String titleGame = "";
+  @override
+  void initState()
+  {
+    gameCount = 5;
+  }
   @override
   //To check if the game title has been updated
   void didChangeDependencies() {
@@ -60,7 +75,7 @@ class _GameScreenState extends State<game_screen> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     urlGames.add(snapshot.data![index].thumb!);
-                    games.add(snapshot.data![index].internalName!);
+                    games.add(snapshot.data![index].external!);
                     //Return image from url in case it does not work use error builder (thanks documentation xd)
                     return Container(
                       child: GestureDetector(
@@ -117,15 +132,15 @@ class _GameScreenState extends State<game_screen> {
                     color: Colors.red,
                   ),
                 ),
-                /*
+
                 FloatingActionButton(
                   child: Icon(Icons.add),
-                    onPressed: (){
-                    setState(() {
-                      gameCount+=5;
-                    });
-
-                 */
+                    onPressed: () {
+                      setState(() {
+                        updateIndex();
+                      });
+                    },
+                    ),
               ],
             ),
           ),
