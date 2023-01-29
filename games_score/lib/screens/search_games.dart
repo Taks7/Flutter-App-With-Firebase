@@ -35,7 +35,7 @@ class _search_gamesState extends State<search_games> {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               const Text(
-                'Game Searcher',
+                'PC videogame Searcher',
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
