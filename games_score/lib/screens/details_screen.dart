@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 //Aqui es on es redirigeix la pagina per puntuar els jocs amb les estrelles
 //Cada valor de la estrella es pasa a String i s'envia a firebase
+// ignore: camel_case_types
 class details_screen extends StatefulWidget {
   const details_screen({Key? key}) : super(key: key);
   @override
@@ -13,6 +14,7 @@ class details_screen extends StatefulWidget {
 
 String titleGame = "";
 
+// ignore: camel_case_types
 class _details_screenState extends State<details_screen> {
   final user = FirebaseAuth.instance.currentUser!;
   @override
@@ -29,25 +31,25 @@ class _details_screenState extends State<details_screen> {
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           "Rate:  " + titleGame,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Gameplay:  ",
                   style: TextStyle(
                       fontSize: 22,
@@ -73,13 +75,13 @@ class _details_screenState extends State<details_screen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Art:  ",
                   style: TextStyle(
                       fontSize: 22,
@@ -105,13 +107,13 @@ class _details_screenState extends State<details_screen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Music:  ",
                   style: TextStyle(
                       fontSize: 22,
@@ -137,13 +139,13 @@ class _details_screenState extends State<details_screen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Price:  ",
                   style: TextStyle(
                       fontSize: 22,
@@ -169,13 +171,13 @@ class _details_screenState extends State<details_screen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Replayability:  ",
                   style: TextStyle(
                       fontSize: 22,
@@ -204,13 +206,13 @@ class _details_screenState extends State<details_screen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Your last Gameplay rate was:  ",
                   style: TextStyle(
                     fontSize: 16,
@@ -219,13 +221,13 @@ class _details_screenState extends State<details_screen> {
                 PrintLastRateGameplay(),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Your last Art rate was:  ",
                   style: TextStyle(
                     fontSize: 16,
@@ -234,13 +236,13 @@ class _details_screenState extends State<details_screen> {
                 PrintLastRateArt(),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Your last Music rate was:  ",
                   style: TextStyle(
                     fontSize: 16,
@@ -249,13 +251,13 @@ class _details_screenState extends State<details_screen> {
                 PrintLastRateMusic(),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Your last Price rate was:  ",
                   style: TextStyle(
                     fontSize: 16,
@@ -264,13 +266,13 @@ class _details_screenState extends State<details_screen> {
                 PrintLastRatePrice(),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Your last Replayability rate was:  ",
                   style: TextStyle(
                     fontSize: 16,
@@ -306,7 +308,7 @@ class PrintLastRateGameplay extends StatelessWidget {
 
         if (docs.length == 0) {
           //Comprobem si hi ha algo dins de la llista
-          return Text(
+          return const Text(
             "There is no last review",
             style: TextStyle(
               fontSize: 15,
@@ -326,7 +328,7 @@ class PrintLastRateGameplay extends StatelessWidget {
                 ),
                 child: Text(
                   rating['rate'],
-                  style: TextStyle(color: Colors.yellow, fontSize: 20),
+                  style: const TextStyle(color: Colors.yellow, fontSize: 20),
                 ),
               ),
             ],
@@ -357,7 +359,7 @@ class PrintLastRateArt extends StatelessWidget {
 
         if (docs.length == 0) {
           //Comprobem si hi ha algo dins de la llista
-          return Text(
+          return const Text(
             "There is no last review",
             style: TextStyle(
               fontSize: 15,
@@ -377,7 +379,7 @@ class PrintLastRateArt extends StatelessWidget {
                 ),
                 child: Text(
                   rating['rate'],
-                  style: TextStyle(color: Colors.yellow, fontSize: 20),
+                  style: const TextStyle(color: Colors.yellow, fontSize: 20),
                 ),
               ),
             ],
@@ -408,7 +410,7 @@ class PrintLastRateMusic extends StatelessWidget {
 
         if (docs.length == 0) {
           //Comprobem si hi ha algo dins de la llista
-          return Text(
+          return const Text(
             "There is no last review",
             style: TextStyle(
               fontSize: 15,
@@ -428,7 +430,7 @@ class PrintLastRateMusic extends StatelessWidget {
                 ),
                 child: Text(
                   rating['rate'],
-                  style: TextStyle(color: Colors.yellow, fontSize: 20),
+                  style: const TextStyle(color: Colors.yellow, fontSize: 20),
                 ),
               ),
             ],
@@ -459,7 +461,7 @@ class PrintLastRatePrice extends StatelessWidget {
 
         if (docs.length == 0) {
           //Comprobem si hi ha algo dins de la llista
-          return Text(
+          return const Text(
             "There is no last review",
             style: TextStyle(
               fontSize: 15,
@@ -479,7 +481,7 @@ class PrintLastRatePrice extends StatelessWidget {
                 ),
                 child: Text(
                   rating['rate'],
-                  style: TextStyle(color: Colors.yellow, fontSize: 20),
+                  style: const TextStyle(color: Colors.yellow, fontSize: 20),
                 ),
               ),
             ],
@@ -510,7 +512,7 @@ class PrintLastRateReplayability extends StatelessWidget {
 
         if (docs.length == 0) {
           //Comprobem si hi ha algo dins de la llista
-          return Text(
+          return const Text(
             "There is no last review",
             style: TextStyle(
               fontSize: 15,
@@ -530,7 +532,7 @@ class PrintLastRateReplayability extends StatelessWidget {
                 ),
                 child: Text(
                   rating['rate'],
-                  style: TextStyle(color: Colors.yellow, fontSize: 20),
+                  style: const TextStyle(color: Colors.yellow, fontSize: 20),
                 ),
               ),
             ],
@@ -561,8 +563,8 @@ class _ScoreAGameState extends State<_ScoreAGame> {
       direction: Axis.horizontal,
       allowHalfRating: false,
       itemCount: 5,
-      itemPadding: EdgeInsets.symmetric(horizontal: 3.0),
-      itemBuilder: (context, _) => Icon(
+      itemPadding: const EdgeInsets.symmetric(horizontal: 3.0),
+      itemBuilder: (context, _) => const Icon(
         Icons.star,
         color: Colors.amber,
       ),

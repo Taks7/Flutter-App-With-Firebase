@@ -34,35 +34,35 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 60,
               ),
-              Icon(
+              const Icon(
                 BoxIcons.bxs_game,
                 color: Colors.amber,
                 size: 120,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 "Welcome to the \n Game Searcher!",
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               TextFormField(
                 controller: emailController,
                 cursorColor: Colors.amber,
                 textInputAction: TextInputAction.next,
-                decoration: InputDecoration(labelText: "Email"),
+                decoration: const InputDecoration(labelText: "Email"),
                 obscureText: false,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (email) =>
@@ -70,41 +70,41 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         ? "Enter a Valid Email"
                         : null,
               ),
-              SizedBox(height: 6),
+              const SizedBox(height: 6),
               TextFormField(
                 controller: passwordController,
                 cursorColor: Colors.amber,
                 textInputAction: TextInputAction.done,
-                decoration: InputDecoration(labelText: "Password"),
+                decoration: const InputDecoration(labelText: "Password"),
                 obscureText: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) => value != null && value.length < 6
                     ? "Enter a minimum of 6 characters"
                     : null,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  minimumSize: Size.fromHeight(50),
+                  minimumSize: const Size.fromHeight(50),
                   backgroundColor: Colors.black,
                 ),
-                icon: Icon(
+                icon: const Icon(
                   Icons.lock_outline,
                   size: 32,
                   color: Colors.amber,
                 ),
-                label: Text(
+                label: const Text(
                   "Sign Up",
                   style: TextStyle(fontSize: 24, color: Colors.amber),
                 ),
                 onPressed: signUp,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               RichText(
                   text: TextSpan(
-                      style: TextStyle(color: Colors.black, fontSize: 20),
+                      style: const TextStyle(color: Colors.black, fontSize: 20),
                       text: "Already have an account? ",
                       children: [
                     TextSpan(

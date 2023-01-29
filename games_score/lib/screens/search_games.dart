@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 
+// ignore: camel_case_types
 class search_games extends StatefulWidget {
   const search_games({Key? key}) : super(key: key);
 
@@ -17,6 +18,7 @@ class search_games extends StatefulWidget {
 //for the animated button and we have also used
 //https://pub.dev/packages/google_fonts for the different font
 
+// ignore: camel_case_types
 class _search_gamesState extends State<search_games> {
   String title = "put here the title of the game";
   TextEditingController controller = TextEditingController();
@@ -30,18 +32,19 @@ class _search_gamesState extends State<search_games> {
         automaticallyImplyLeading: false,
         title: Column(children: <Widget>[
           Row(
+            // ignore: prefer_const_literals_to_create_immutables
             children: [
-              Text(
+              const Text(
                 'Game Searcher',
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 24),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
-              Icon(
+              const Icon(
                 BoxIcons.bxs_game,
                 color: Colors.amber,
               )
@@ -51,7 +54,7 @@ class _search_gamesState extends State<search_games> {
             children: [
               Text(
                 "Logged in as: ${user.email!}",
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14,
                 ),
@@ -59,7 +62,7 @@ class _search_gamesState extends State<search_games> {
             ],
           ),
         ]),
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       ),
       body: Center(
         child: Column(
@@ -69,7 +72,7 @@ class _search_gamesState extends State<search_games> {
               controller: controller,
             ),
             Padding(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               child: AnimatedButton.strip(
                 animatedOn: AnimatedOn.onHover,
                 width: 200,
@@ -100,10 +103,11 @@ class _search_gamesState extends State<search_games> {
         builder: (BuildContext context) {
           return ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
-                minimumSize: Size.fromHeight(50),
+                minimumSize: const Size.fromHeight(50),
                 backgroundColor: Colors.black),
-            icon: Icon(BoxIcons.bx_arrow_back, size: 32, color: Colors.white),
-            label: Text(
+            icon: const Icon(BoxIcons.bx_arrow_back,
+                size: 32, color: Colors.white),
+            label: const Text(
               "Sign Out",
               style: TextStyle(fontSize: 24, color: Colors.white),
             ),
@@ -112,9 +116,7 @@ class _search_gamesState extends State<search_games> {
               setState(() {
                 Navigator.of(context).pushNamed(
                   '/login-screen',
-                  //arguments: title,
                 );
-
               });
             },
           );

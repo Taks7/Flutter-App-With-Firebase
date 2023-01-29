@@ -1,9 +1,11 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:games_score/model/games.dart';
 
-
+// ignore: camel_case_types
 class game_screen extends StatefulWidget {
-  game_screen({
+  const game_screen({
     Key? key,
   }) : super(key: key);
   @override
@@ -15,10 +17,10 @@ List<String> games = [];
 List<String> urlGames = [];
 int gameCount = 0;
 
-void UpdateGameCount(int ListLength)
-{
+void UpdateGameCount(int ListLength) {
   gameCount = ListLength;
 }
+
 class _GameScreenState extends State<game_screen> {
   String titleGame = "";
 
@@ -35,11 +37,14 @@ class _GameScreenState extends State<game_screen> {
     Future<List<Game>> futureAlbum = fetchAlbum(titleGame);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         automaticallyImplyLeading: false,
         leading: Expanded(
           child: GestureDetector(
-            child: const Icon(Icons.arrow_back,color: Colors.white,),
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
             onTap: () {
               games.clear();
               urlGames.clear();
@@ -53,68 +58,68 @@ class _GameScreenState extends State<game_screen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-              child: FutureBuilder<List<Game>>(
-                future: futureAlbum,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    gameCount = snapshot.data!.length;
-                    for(int i = 0; i<snapshot.data!.length;i++)
-                      {
-                        urlGames.add(snapshot.data![i].thumb!);
-                        games.add(snapshot.data![i].external!);
-                      }
-                    return GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
-                        ),
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (context,index)=>GridTile(
-                          child: Container(
-                            width: 250,
-                            height: 250,
-                            child: GestureDetector(
-                              onTap: (){
-                                setState(() {
-                                  //MARCAR COMO FAVORITO
-                                  Navigator.pushNamed(
-                                    context,
-                                    '/details-games',
-                                    arguments: games[index],
-                                  );
-                                });
-                              },
-                              onDoubleTap: (){
-                                setState(() {
-                                  Navigator.pushNamed(
-                                    context,
-                                    '/screenshoot-games',
-                                    arguments: games[index],
-                                  );
-                                });
-                              },
-                              child: Image.network(
-                                urlGames[index],
-                                errorBuilder: (BuildContext context, Object exception,
-                                    StackTrace? stackTrace) {
-                                  return Text("Your image could not be loaded, the game is ${games[index]}");
-                                },
-                              ),
-                            ),
+            child: FutureBuilder<List<Game>>(
+              future: futureAlbum,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  gameCount = snapshot.data!.length;
+                  for (int i = 0; i < snapshot.data!.length; i++) {
+                    urlGames.add(snapshot.data![i].thumb!);
+                    games.add(snapshot.data![i].external!);
+                  }
+                  return GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                    ),
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) => GridTile(
+                      child: Container(
+                        width: 250,
+                        height: 250,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              //MARCAR COMO FAVORITO
+                              Navigator.pushNamed(
+                                context,
+                                '/details-games',
+                                arguments: games[index],
+                              );
+                            });
+                          },
+                          onDoubleTap: () {
+                            setState(() {
+                              Navigator.pushNamed(
+                                context,
+                                '/screenshoot-games',
+                                arguments: games[index],
+                              );
+                            });
+                          },
+                          child: Image.network(
+                            urlGames[index],
+                            errorBuilder: (BuildContext context,
+                                Object exception, StackTrace? stackTrace) {
+                              return Text(
+                                  "Your image could not be loaded, the game is ${games[index]}");
+                            },
                           ),
                         ),
-                        );
-                  }
-                  else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  }
+                      ),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
 
-                  // By default, show a loading spinner.
-                  return const CircularProgressIndicator();
-                },
-              ),
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
             ),
-            ],
           ),
-    );//AQUI PONEMOS LA INFO DE METASCORE (NOMBR
+        ],
+      ),
+    ); //AQUI PONEMOS LA INFO DE METASCORE (NOMBR
   }
 }

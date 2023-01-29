@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 //Aqui es on es redirigeix la pagina per pujar ScreenShoots a Firebase Storage
+// ignore: camel_case_types
 class screenshots_screen extends StatefulWidget {
   const screenshots_screen({Key? key}) : super(key: key);
   @override
@@ -15,6 +16,7 @@ class screenshots_screen extends StatefulWidget {
 
 String titleGame = "";
 
+// ignore: camel_case_types
 class _screenshoots_screenState extends State<screenshots_screen> {
   final user = FirebaseAuth.instance.currentUser!;
   @override
@@ -50,18 +52,19 @@ class _screenshoots_screenState extends State<screenshots_screen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: true,
         title: Text(
           "Upload a Screenshoot of: " + titleGame,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
       ),
       body: Column(
         children: [
+          // ignore: prefer_const_constructors
           SizedBox(
             height: 40,
           ),
@@ -78,7 +81,7 @@ class _screenshoots_screenState extends State<screenshots_screen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Row(
@@ -88,13 +91,13 @@ class _screenshoots_screenState extends State<screenshots_screen> {
                   onPressed: selectFile,
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: Text(
+                  child: const Text(
                     "Select a Screenshoot to upload",
                     style: TextStyle(color: Colors.amber),
                   )),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
@@ -104,7 +107,7 @@ class _screenshoots_screenState extends State<screenshots_screen> {
                   onPressed: uploadFile,
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: Text(
+                  child: const Text(
                     "Upload the Screenshoot to Firebase Storage",
                     style: TextStyle(color: Colors.amber),
                   )),

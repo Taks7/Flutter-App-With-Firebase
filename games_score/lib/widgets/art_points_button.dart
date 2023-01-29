@@ -26,18 +26,21 @@ class _CounterState extends State<ArtCounter> {
       },
       child: Container(
         width: widget.size,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.purple,
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-
         ),
         child: Row(
           children: <Widget>[
-            SizedBox(width: 25,),
-            Icon(Icons.palette),
-            SizedBox(width: 25,),
+            const SizedBox(
+              width: 25,
+            ),
+            const Icon(Icons.palette),
+            const SizedBox(
+              width: 25,
+            ),
             Text("$count",
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                 ))
           ],

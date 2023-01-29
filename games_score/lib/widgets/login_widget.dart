@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -30,66 +29,66 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
-            Icon(
+            const Icon(
               BoxIcons.bxs_game,
               color: Colors.amber,
               size: 120,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               "Hey There, \n Welcome Back!",
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             TextField(
               controller: emailController,
               cursorColor: Colors.amber,
               textInputAction: TextInputAction.next,
-              decoration: InputDecoration(labelText: "Email"),
+              decoration: const InputDecoration(labelText: "Email"),
               obscureText: false,
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             TextField(
               controller: passwordController,
               cursorColor: Colors.amber,
               textInputAction: TextInputAction.done,
-              decoration: InputDecoration(labelText: "Password"),
+              decoration: const InputDecoration(labelText: "Password"),
               obscureText: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size.fromHeight(50),
+                minimumSize: const Size.fromHeight(50),
                 backgroundColor: Colors.black,
               ),
-              icon: Icon(
+              icon: const Icon(
                 Icons.lock_outline,
                 size: 32,
                 color: Colors.amber,
               ),
-              label: Text(
+              label: const Text(
                 "Sign In",
                 style: TextStyle(fontSize: 24, color: Colors.amber),
               ),
               onPressed: signIn,
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             RichText(
                 text: TextSpan(
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                    style: const TextStyle(color: Colors.black, fontSize: 20),
                     text: "No Account? ",
                     children: [
                   TextSpan(

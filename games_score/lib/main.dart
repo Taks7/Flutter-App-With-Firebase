@@ -6,8 +6,6 @@ import 'package:games_score/screens/game_screen.dart';
 import 'package:games_score/screens/login_screen.dart';
 import 'package:games_score/screens/screenshots_screen.dart';
 import 'package:games_score/screens/search_games.dart';
-//import 'package:games_score/screens/chat_list_screen.dart';
-//import 'package:games_score/screens/chat_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

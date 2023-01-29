@@ -26,17 +26,21 @@ class _CounterState extends State<GameplayCounter> {
       },
       child: Container(
         width: widget.size,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.lightGreenAccent,
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
         child: Row(
           children: <Widget>[
-            SizedBox(width: 25,),
-            Icon(Icons.gamepad),
-            SizedBox(width: 25,),
+            const SizedBox(
+              width: 25,
+            ),
+            const Icon(Icons.gamepad),
+            const SizedBox(
+              width: 25,
+            ),
             Text("$count",
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                 ))
           ],
