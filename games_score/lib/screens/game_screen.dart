@@ -65,7 +65,7 @@ class _GameScreenState extends State<game_screen> {
                       }
                     return GridView.builder(
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 8,
+                          crossAxisCount: 4,
                         ),
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context,index)=>GridTile(
@@ -96,9 +96,7 @@ class _GameScreenState extends State<game_screen> {
                                 urlGames[index],
                                 errorBuilder: (BuildContext context, Object exception,
                                     StackTrace? stackTrace) {
-                                  return const Text(
-                                    //Seems like some images of the api are banned or smh just an error that we got during development and now we have this to solve it
-                                      'Your image could not be loaded, your game is:' );
+                                  return Text("Your image could not be loaded, the game is ${games[index]}");
                                 },
                               ),
                             ),

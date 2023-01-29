@@ -114,6 +114,7 @@ class _search_gamesState extends State<search_games> {
                   '/login-screen',
                   //arguments: title,
                 );
+
               });
             },
           );

@@ -38,7 +38,6 @@ class _loginScreenState extends State<login_screen>
             return Center(child: CircularProgressIndicator());
           }
           else if(snapshot.hasData){
-
             return search_games();
           }
           else {
