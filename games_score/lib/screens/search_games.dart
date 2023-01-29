@@ -20,7 +20,7 @@ class _search_gamesState extends State<search_games> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: Column(children: <Widget>[
           Row(
             children: [
