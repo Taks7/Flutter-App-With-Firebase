@@ -54,7 +54,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               cursorColor: Colors.amber,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(labelText: "Email"),
-              obscureText: true,
+              obscureText: false,
             ),
             SizedBox(height: 6),
             TextField(

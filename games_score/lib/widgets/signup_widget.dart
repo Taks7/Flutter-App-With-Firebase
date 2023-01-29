@@ -60,7 +60,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 cursorColor: Colors.amber,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(labelText: "Email"),
-                obscureText: true,
+                obscureText: false,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (email) =>
                     email != null && !EmailValidator.validate(email)
