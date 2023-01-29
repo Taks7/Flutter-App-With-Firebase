@@ -1,39 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
-import 'package:games_score/model/games.dart';
 import 'package:flutter/material.dart';
 import 'package:games_score/screens/auth_screen.dart';
-import 'package:games_score/screens/screenshots_screen.dart';
-import 'package:games_score/screens/search_games.dart';
-import 'package:games_score/widgets/login_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
-/*
-class login_screen extends StatefulWidget {
-  const login_screen({Key? key}) : super(key: key);
-
-  @override
-  State<login_screen> createState() => _loginScreenState();
-}
-
-class _loginScreenState extends State<login_screen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Sign In")),
-      body: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: ((context, snapshot) {
-          if (snapshot.hasData) {
-            return screenshots_screen();
-          } else {
-            return LoginWidget();
-          }
-        }),
-      ),
-    );
-  }
-}
-*/
 
 //We have used https://pub.dev/packages/flutter_animated_button
 //for the animated button and we have also used
@@ -86,7 +55,6 @@ class _loginScreenState extends State<login_screen>
                   setState(() {
                     Navigator.of(context).pushNamed(
                       '/search-games',
-                      //arguments: title,
                     );
                   });
                 },
@@ -106,24 +74,3 @@ class _loginScreenState extends State<login_screen>
         password: passwordController.text.trim());
   }
 }
-/*
-AnimatedButton(
-                width: 200,
-                text: 'TAP',
-                selectedTextColor: Colors.black,
-                transitionType: TransitionType.CENTER_TB_IN,
-                textStyle: TextStyle(
-                    fontSize: 28,
-                    letterSpacing: 5,
-                    color: Colors.deepOrange,
-                    fontWeight: FontWeight.w300),
-                onPress: () {
-                  setState(() {
-                    Navigator.of(context).pushNamed(
-                      '/search-games',
-                      //arguments: title,
-                    );
-                  });
-                },
-              ),
-*/

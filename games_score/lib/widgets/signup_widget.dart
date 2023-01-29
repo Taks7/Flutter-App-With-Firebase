@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 // We have used https://pub.dev/packages/email_validator
 //To validate the emails introduced in the Sign Up process
@@ -42,7 +43,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               SizedBox(
                 height: 60,
               ),
-              FlutterLogo(
+              Icon(
+                BoxIcons.bxs_game,
+                color: Colors.amber,
                 size: 120,
               ),
               SizedBox(
@@ -83,14 +86,16 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size.fromHeight(50),
+                  backgroundColor: Colors.black,
                 ),
                 icon: Icon(
                   Icons.lock_outline,
                   size: 32,
+                  color: Colors.amber,
                 ),
                 label: Text(
                   "Sign Up",
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 24, color: Colors.amber),
                 ),
                 onPressed: signUp,
               ),

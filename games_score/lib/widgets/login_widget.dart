@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class LoginWidget extends StatefulWidget {
   final VoidCallback onClickedSignUp;
@@ -36,7 +37,9 @@ class _LoginWidgetState extends State<LoginWidget> {
             SizedBox(
               height: 60,
             ),
-            FlutterLogo(
+            Icon(
+              BoxIcons.bxs_game,
+              color: Colors.amber,
               size: 120,
             ),
             SizedBox(
@@ -68,14 +71,16 @@ class _LoginWidgetState extends State<LoginWidget> {
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 minimumSize: Size.fromHeight(50),
+                backgroundColor: Colors.black,
               ),
               icon: Icon(
                 Icons.lock_outline,
                 size: 32,
+                color: Colors.amber,
               ),
               label: Text(
                 "Sign In",
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 24, color: Colors.amber),
               ),
               onPressed: signIn,
             ),

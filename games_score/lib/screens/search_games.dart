@@ -105,22 +105,3 @@ class _search_gamesState extends State<search_games> {
     );
   }
 }
-/*
-ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(minimumSize: Size.fromHeight(30)),
-            icon: Icon(
-              BoxIcons.bx_arrow_back,
-              size: 22,
-            ),
-            label: Text(
-              "Sign Out",
-              style: TextStyle(fontSize: 18),
-            ),
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-              setState(() {
-                Navigator.of(context).pop();
-              });
-            },
-          ),
-*/
