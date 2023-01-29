@@ -21,6 +21,7 @@ class _search_gamesState extends State<search_games> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
+        automaticallyImplyLeading: false,
         title: Column(children: <Widget>[
           Row(
             children: [
