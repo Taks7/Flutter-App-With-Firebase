@@ -47,7 +47,19 @@ class _screenshoots_screenState extends State<screenshots_screen> {
   Widget build(BuildContext context) {
     final _db = FirebaseFirestore.instance;
     return Scaffold(
-      appBar: AppBar(title: Text("Upload a Screenshoot of " + titleGame)),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        centerTitle: true,
+        title: Text(
+          "Upload a Screenshoot of: " + titleGame,
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+      ),
       body: Column(
         children: [
           SizedBox(
@@ -74,7 +86,12 @@ class _screenshoots_screenState extends State<screenshots_screen> {
             children: [
               ElevatedButton(
                   onPressed: selectFile,
-                  child: Text("Select a Screenshoot to upload")),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                  child: Text(
+                    "Select a Screenshoot to upload",
+                    style: TextStyle(color: Colors.amber),
+                  )),
             ],
           ),
           SizedBox(
@@ -85,7 +102,12 @@ class _screenshoots_screenState extends State<screenshots_screen> {
             children: [
               ElevatedButton(
                   onPressed: uploadFile,
-                  child: Text("Upload the Screenshoot to Firebase Storage")),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                  child: Text(
+                    "Upload the Screenshoot to Firebase Storage",
+                    style: TextStyle(color: Colors.amber),
+                  )),
             ],
           ),
         ],
