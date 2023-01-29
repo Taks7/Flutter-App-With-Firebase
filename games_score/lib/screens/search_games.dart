@@ -40,18 +40,6 @@ class _search_gamesState extends State<search_games> {
               )
             ],
           ),
-          ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(minimumSize: Size.fromHeight(30)),
-            icon: Icon(
-              BoxIcons.bx_arrow_back,
-              size: 22,
-            ),
-            label: Text(
-              "Sign Out",
-              style: TextStyle(fontSize: 18),
-            ),
-            onPressed: (() => FirebaseAuth.instance.signOut()),
-          ),
           Row(
             children: [
               Text(
@@ -74,7 +62,13 @@ class _search_gamesState extends State<search_games> {
               controller: controller,
             ),
             ElevatedButton(
-              child: const Text("Search Game"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+              ),
+              child: const Text(
+                "Search Game",
+                style: TextStyle(color: Colors.amber, fontSize: 18),
+              ),
               onPressed: () {
                 title = controller.text;
                 Navigator.of(context).pushNamed(
@@ -86,6 +80,46 @@ class _search_gamesState extends State<search_games> {
           ],
         ),
       ),
+      bottomSheet: BottomSheet(
+        builder: (BuildContext context) {
+          return ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+                minimumSize: Size.fromHeight(50),
+                backgroundColor: Colors.black),
+            icon: Icon(BoxIcons.bx_arrow_back, size: 32, color: Colors.white),
+            label: Text(
+              "Sign Out",
+              style: TextStyle(fontSize: 24, color: Colors.white),
+            ),
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              setState(() {
+                Navigator.of(context).pop();
+              });
+            },
+          );
+        },
+        onClosing: () {},
+      ),
     );
   }
 }
+/*
+ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(minimumSize: Size.fromHeight(30)),
+            icon: Icon(
+              BoxIcons.bx_arrow_back,
+              size: 22,
+            ),
+            label: Text(
+              "Sign Out",
+              style: TextStyle(fontSize: 18),
+            ),
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              setState(() {
+                Navigator.of(context).pop();
+              });
+            },
+          ),
+*/
