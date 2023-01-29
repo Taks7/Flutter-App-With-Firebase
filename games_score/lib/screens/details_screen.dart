@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class details_screen extends StatefulWidget {
 String titleGame = "";
 
 class _details_screenState extends State<details_screen> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   void didChangeDependencies() {
     final string = ModalRoute.of(context)!.settings.arguments;
@@ -48,7 +50,7 @@ class _details_screenState extends State<details_screen> {
                 ),
                 child: _ScoreAGame(
                   sendRating: (String totalrating) {
-                    _db.collection("/rating/$titleGame/gameplay").add(
+                    _db.collection("/${user.email!}/$titleGame/gameplay").add(
                       {
                         'rate': totalrating,
                         'date': Timestamp.now(),
@@ -80,7 +82,7 @@ class _details_screenState extends State<details_screen> {
                 ),
                 child: _ScoreAGame(
                   sendRating: (String totalrating) {
-                    _db.collection("/rating/$titleGame/art").add(
+                    _db.collection("/${user.email!}/$titleGame/art").add(
                       {
                         'rate': totalrating,
                         'date': Timestamp.now(),
@@ -112,7 +114,7 @@ class _details_screenState extends State<details_screen> {
                 ),
                 child: _ScoreAGame(
                   sendRating: (String totalrating) {
-                    _db.collection("/rating/$titleGame/music").add(
+                    _db.collection("/${user.email!}/$titleGame/music").add(
                       {
                         'rate': totalrating,
                         'date': Timestamp.now(),
@@ -184,10 +186,11 @@ class _details_screenState extends State<details_screen> {
 }
 
 class PrintLastRateGameplay extends StatelessWidget {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     final _db = FirebaseFirestore.instance;
-    final ratingPath = "/rating/$titleGame/gameplay";
+    final ratingPath = "/${user.email!}/$titleGame/gameplay";
     return StreamBuilder(
       stream: _db
           .collection(ratingPath)
@@ -234,10 +237,11 @@ class PrintLastRateGameplay extends StatelessWidget {
 }
 
 class PrintLastRateArt extends StatelessWidget {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     final _db = FirebaseFirestore.instance;
-    final ratingPath = "/rating/$titleGame/art";
+    final ratingPath = "/${user.email!}/$titleGame/art";
     return StreamBuilder(
       stream: _db
           .collection(ratingPath)
@@ -284,10 +288,11 @@ class PrintLastRateArt extends StatelessWidget {
 }
 
 class PrintLastRateMusic extends StatelessWidget {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     final _db = FirebaseFirestore.instance;
-    final ratingPath = "/rating/$titleGame/music";
+    final ratingPath = "/${user.email!}/$titleGame/music";
     return StreamBuilder(
       stream: _db
           .collection(ratingPath)

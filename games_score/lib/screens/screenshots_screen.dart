@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class screenshots_screen extends StatefulWidget {
 String titleGame = "";
 
 class _screenshoots_screenState extends State<screenshots_screen> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   void didChangeDependencies() {
     final string = ModalRoute.of(context)!.settings.arguments;
@@ -34,7 +36,7 @@ class _screenshoots_screenState extends State<screenshots_screen> {
   }
 
   Future uploadFile() async {
-    final path = "/rating/$titleGame/screenshots";
+    final path = "/${user.email!}/$titleGame/screenshots";
     final file = File(pickedFile!.path!);
 
     final ref = FirebaseStorage.instance.ref().child(path);
